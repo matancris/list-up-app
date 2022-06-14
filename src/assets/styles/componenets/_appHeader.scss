@@ -1,0 +1,158 @@
+.app-header {
+    height: $header-height;
+    box-shadow: #ccc 0px 0px 3px 1px;
+    margin-bottom: 30px;
+
+    nav {
+        width: 50%;
+        height: 100%;
+
+        &>*:not(:first-child) {
+            flex: 1;
+            border-inline-end: 1px solid #ddd;
+
+            @include for-mobile-layout {
+                border-bottom: #2c3e50;
+                border-inline: none;
+            }
+        }
+
+        .home-a {
+            display: none;
+        }
+
+        a {
+            font-weight: bold;
+            color: $clr5;
+
+            &.router-link-exact-active {
+                color: $clr5;
+            }
+
+            @include for-mobile-layout {
+                flex: 1;
+                display: flex;
+                width: 90%;
+                height: 50%;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        @include for-mobile-layout {
+
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            background-color: #f6fdff;
+            transform: translateY($header-height);
+            height: 0;
+            overflow: hidden;
+            transition: height 0.5s;
+            z-index: 2;
+
+            &.menu-open {
+                border-bottom: 1px solid #ddd;
+                height: 20%;
+            }
+
+            &:first-child img {
+                display: none;
+            }
+
+            .home-a {
+                display: block;
+            }
+        }
+
+
+    }
+
+    .logo {
+        max-width: 100px;
+        height: $header-height;
+        padding: 5px;
+
+        img {
+            height: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .user-title {
+        position: relative;
+
+        h5 {
+            margin-inline: 5px;
+        }
+
+        .avatar {
+            max-width: 40px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .user-opt-modal {
+            position: absolute;
+            z-index: 1;
+            background-color: #fff;
+            top: 40px;
+            right: 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+
+            hr {
+                width: 100%;
+                margin: 0;
+            }
+
+            li {
+                padding: 7px 20px;
+            }
+
+            li:last-child {
+                cursor: pointer;
+            }
+        }
+
+        @include for-mobile-layout {
+            flex-direction: row-reverse;
+        }
+    }
+
+
+    .login-btn {
+        background-color: $clr5;
+        padding: 8px;
+        border-radius: 10px;
+        color: #fff;
+    }
+
+
+
+    .mobile-menu-btn {
+
+        display: none;
+
+        @include for-mobile-layout {
+            display: block;
+            width: 40px;
+            padding: 10px;
+            font-size: 1.25rem;
+            // color: white;
+            transition: 0.5s;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            outline: none;
+            cursor: pointer;
+        }
+    }
+
+}

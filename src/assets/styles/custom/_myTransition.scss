@@ -1,0 +1,19 @@
+.my-transition {
+    width: 100%;
+    user-select: none;
+    &.accordion {
+        // margin-bottom: 20px;
+        border-radius: 5px;
+        .header {
+            width: fit-content;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .body {
+            overflow: hidden;
+            transition: .3s ease-out;
+            padding-block: 10px;
+        }
+    }
+}

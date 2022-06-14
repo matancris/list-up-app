@@ -1,0 +1,11 @@
+.group-preview {
+    box-shadow: #ccc 0px 0px 3px 1px;
+    border-radius: 10px;
+    padding: 10px;
+
+    .add-prod-form {
+        button {
+            margin-inline-start: 10px;
+        }
+    }
+}

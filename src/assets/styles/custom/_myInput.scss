@@ -1,0 +1,58 @@
+.my-input {
+    position: relative;
+    width: 80%;
+
+    input {
+        border-radius: 5px;
+        background: none;
+        color: $clr1;
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        width: 100%;
+        border: 1px solid #aaa;
+
+        &:focus {
+            border: 1px solid $clr5;
+            background: none;
+            outline: none;
+        }
+
+        &:focus~label,
+        &:valid~label {
+            background-color: #fff;
+            top: 0;
+            font-size: 12px;
+            color: $clr5;
+        }
+    }
+
+    input[type='password'] {
+        letter-spacing: 0.3em;
+    }
+
+    label {
+        color: #aaa;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 7px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: 0.3s ease all;
+
+        // &::before {
+        //     display: inline-block;
+        //     position: absolute;
+        //     top:47%;
+        //     left: 0;
+        //     content: "";
+        //     height: 1px;
+        //     width: 120%;
+        //     background-color: #fff;
+        // }
+    }
+
+    @include for-mobile-layout {
+        width: 80%;
+    }
+}

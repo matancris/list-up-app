@@ -1,0 +1,27 @@
+.product-preview {
+    user-select: none;
+    
+
+    &.done >*:not(.action-btn-container, ::before) {
+        text-decoration: line-through;
+    }
+    &:not(:last-child){
+        margin: 0 0 1rem;
+    }
+
+    h2 {
+        margin-inline-start: 5px;
+        cursor: pointer;
+    }
+
+    .action-btn-container{
+        visibility: hidden;
+        opacity: 0;
+        transition: .3s;
+    }
+
+    &:hover .action-btn-container{
+        visibility: visible;
+        opacity: 1;
+    }
+}

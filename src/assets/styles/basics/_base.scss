@@ -1,0 +1,159 @@
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    min-height: 100vh;
+
+    @include for-mobile-layout {
+        font-size: 14px;
+
+    }
+}
+
+.App {
+    min-height: 100vh;
+
+    // background-color: #fff3e4ad;
+    //     background-image: url('@/../../img/clock-bgi.jpg');
+    //     background-position: center;
+    //     background-repeat: no-repeat;
+    //     background-size: cover;
+    //     color: #3c3c3c;
+}
+
+
+body {
+    margin: 0;
+    height: 100%;
+    font-size: 0.875rem;
+    font-family: Raleway-Regular, Tahoma, Geneva, Verdana, sans-serif;
+    color: #666565;
+
+    background-position: 0 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+p {
+    margin: 0;
+}
+
+main {
+    height: 100%;
+    width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    margin: 0;
+    line-height: lh(40px, 29px);
+}
+
+h1 {
+    font-size: rem(20px);
+    margin: 0 0 1rem;
+}
+
+h2 {
+    font-size: rem(18px)
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+.btn {
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-weight: 700;
+    font-family: Raleway-Regular, Tahoma, Geneva, Verdana, sans-serif;
+    border: 0;
+    padding: 5px;
+    border-radius: 5px;
+    color: $clr5;
+    box-shadow: -1px 1px 4px 0px #77777763;
+}
+
+img {
+    max-width: 100%;
+}
+
+input[type=checkbox]:checked {
+    appearance: none;
+  
+    &::before {
+        content: "✔";
+        color: $clr5;
+        font-size: rem(20px);
+    }
+}
+
+// SELECT STYLE
+
+select {
+    /* Reset */
+
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+
+    /* Styling */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+    cursor: pointer;
+
+
+    /* ARROW */
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, gray 50%),
+        linear-gradient(135deg, gray 50%, transparent 50%),
+        linear-gradient(to right, #ccc, #ccc);
+    background-position:
+        calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 2.5em) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+    background-repeat: no-repeat;
+
+    &:focus {
+        background-image:
+            linear-gradient(45deg, green 50%, transparent 50%),
+            linear-gradient(135deg, transparent 50%, green 50%),
+            linear-gradient(to right, #ccc, #ccc);
+        background-position:
+            calc(100% - 15px) 1em,
+            calc(100% - 20px) 1em,
+            calc(100% - 2.5em) 0.5em;
+        background-size:
+            5px 5px,
+            5px 5px,
+            1px 1.5em;
+        background-repeat: no-repeat;
+    }
+}
+
+
+
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
