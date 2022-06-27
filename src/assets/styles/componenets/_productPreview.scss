@@ -1,12 +1,13 @@
 .product-preview {
     user-select: none;
-    
+    margin: 0 0 1rem;
 
-    &.done >*:not(.action-btn-container, ::before) {
-        text-decoration: line-through;
+    &.done {
+        order: 1;
     }
-    &:not(:last-child){
-        margin: 0 0 1rem;
+
+    &.done>*:not(.action-btn-container, ::before) {
+        text-decoration: line-through;
     }
 
     h2 {
@@ -14,14 +15,19 @@
         cursor: pointer;
     }
 
-    .action-btn-container{
-        visibility: hidden;
-        opacity: 0;
-        transition: .3s;
+    @include for-normal-layout {
+
+        .action-btn-container {
+            visibility: hidden;
+            opacity: 0;
+            transition: .3s;
+        }
+
+
+        &:hover .action-btn-container {
+            visibility: visible;
+            opacity: 1;
+        }
     }
 
-    &:hover .action-btn-container{
-        visibility: visible;
-        opacity: 1;
-    }
 }

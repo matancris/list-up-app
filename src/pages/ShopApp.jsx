@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { GroupList } from '../cmps/GroupList'
 import { groupService } from '../services/group-service'
+// import { groupServiceAWS } from '../services/group-service-aws'
 
 export default function ShopApp() {
   let [groups, setGroups] = useState([])
 
   useEffect(() => {
+    console.log('before fatch') // TODO: spelling : fetch
     // async function getGroups() {
     //   const groupsToShow = await groupService.query()
     //   setGroups(structuredClone(groupsToShow))
@@ -15,7 +17,9 @@ export default function ShopApp() {
 
   const loadGroups = async () => {
     const groupsToShow = await groupService.query()
-    setGroups(structuredClone(groupsToShow))
+    console.log('loadGroups ~ groupsToShow', groupsToShow)
+    groupsToShow &&
+      setGroups(structuredClone(groupsToShow))
   }
 
   const onUpdateGroup = async (groupId, updatedProduct) => {

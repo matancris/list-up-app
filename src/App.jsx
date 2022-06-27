@@ -10,9 +10,9 @@ function App() {
         Header
       </AppHeader>
       <Routes>
-        <Route path="/" element={<ShopApp /> } />
+        <Route path="/" element={<ShopApp />} />
       </Routes>
-      
+
     </div>
   );
 }

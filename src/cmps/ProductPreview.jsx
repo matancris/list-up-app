@@ -12,13 +12,11 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
     }, [updatedProd])
 
     useEffect(() => {
-        console.log('isEditMode',isEditMode);
         isEditMode && titleRef.current.focus()
     }, [isEditMode])
 
 
     const handleChange = ({ target }) => {
-        console.log('handleChange ~ target', target)
         const { type, name, value } = target
         setUpdatedProduct({ ...product, [name]: type !== 'checkbox' ? value : target.checked })
     }

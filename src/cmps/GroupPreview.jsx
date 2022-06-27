@@ -3,6 +3,7 @@ import { ProductPreview } from './ProductPreview'
 
 export function GroupPreview({ group, onUpdateGroup, onRemoveProd }) {
     const [newProd, setNewProd] = useState({ title: '' })
+    const [isOpen, setIsOpen] = useState(true)
 
     const onUpdateProd = (updatedProduct) => {
         onUpdateGroup(group.id, updatedProduct)
@@ -27,16 +28,19 @@ export function GroupPreview({ group, onUpdateGroup, onRemoveProd }) {
 
     return (
         <section className="group-preview">
-            <h1>{group.title}</h1>
-            {
-                group.products.map((product) => (
-                    <ProductPreview
-                        product={product}
-                        key={product.id}
-                        onUpdateProd={onUpdateProd}
-                        onDeleteProd={onDeleteProd} />
-                ))
-            }
+            <h1 onClick={() => setIsOpen(!isOpen) } title="Open\Close list">{group.title}</h1>
+            <article className={`prod-prev-container flex column ${isOpen ? 'open' : ''}`}>
+                {
+                    group.products.map((product) => (
+                        <ProductPreview
+                            product={product}
+                            key={product.id}
+                            onUpdateProd={onUpdateProd}
+                            onDeleteProd={onDeleteProd} />
+                    ))
+                }
+
+            </article>
             <form className="add-prod-form" onSubmit={onAddProd}>
                 <input type="text" name="title" id="" onChange={handleInput} value={newProd.title} />
                 <button className='add-btn'>add</button>
