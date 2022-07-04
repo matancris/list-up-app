@@ -4,6 +4,8 @@ import './assets/styles/styles.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+
 
 // AWS Config
 // import * as AWS from 'aws-sdk'
@@ -24,4 +26,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-ServiceWorkerRegistration.register();
+
+serviceWorkerRegistration.register();
