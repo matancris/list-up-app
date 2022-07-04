@@ -32,10 +32,15 @@ export default function ShopApp() {
     loadGroups()
   }
 
+  const onDeleteGroup = async (groupId) => {
+    await groupService.deleteGroup(groupId)
+    loadGroups()
+  }
+
 
   return (
     <section className="shop-app main-container">
-      <GroupList groups={groups} onUpdateGroup={onUpdateGroup} onRemoveProd={onRemoveProd} />
+      <GroupList groups={groups} onUpdateGroup={onUpdateGroup} onRemoveProd={onRemoveProd} onDeleteGroup={onDeleteGroup} />
     </section>
   )
 }

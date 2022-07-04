@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { MdOutlineDelete } from 'react-icons/md';
+import { RiEditLine } from 'react-icons/ri';
+
 
 export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
 
@@ -45,8 +48,8 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
                     />}
             </label>
             <div className="action-btn-container flex">
-                <button onMouseDown={onEdit}>Edit</button>
-                <button onClick={() => onDeleteProd(product.id)}>delete</button>
+                <button onMouseDown={onEdit}><RiEditLine/></button>
+                <button onClick={() => onDeleteProd(product.id)}><MdOutlineDelete/></button>
             </div>
         </section>
     )

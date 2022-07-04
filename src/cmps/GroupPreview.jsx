@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { ProductPreview } from './ProductPreview'
 
-export function GroupPreview({ group, onUpdateGroup, onRemoveProd }) {
+// Icons import
+import { MdOutlineDelete } from 'react-icons/md';
+import { IoAddOutline } from 'react-icons/io5';
+
+export function GroupPreview({ group, onUpdateGroup, onRemoveProd, onDeleteGroup }) {
     const [newProd, setNewProd] = useState({ title: '' })
     const [isOpen, setIsOpen] = useState(true)
 
@@ -28,7 +32,14 @@ export function GroupPreview({ group, onUpdateGroup, onRemoveProd }) {
 
     return (
         <section className="group-preview">
-            <h1 onClick={() => setIsOpen(!isOpen) } title="Open\Close list">{group.title}</h1>
+            <div className={`group-header flex ${!isOpen ? 'm-0' : ''}`}  >
+                <h1  onClick={() => setIsOpen(!isOpen)} title="Open\Close list">{group.title}</h1>
+                <div className="action-btn-container flex">
+                    {/* <button onMouseDown={onEdit}>Edit</button> */}
+                    <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete/></button>
+                </div>
+
+            </div>
             <article className={`prod-prev-container flex column ${isOpen ? 'open' : ''}`}>
                 {
                     group.products.map((product) => (
@@ -41,10 +52,10 @@ export function GroupPreview({ group, onUpdateGroup, onRemoveProd }) {
                 }
 
             </article>
-            <form className="add-prod-form" onSubmit={onAddProd}>
+            {isOpen && <form className="add-prod-form flex" onSubmit={onAddProd}>
                 <input type="text" name="title" id="" onChange={handleInput} value={newProd.title} />
-                <button className='add-btn'>add</button>
-            </form>
+                <button className='add-btn'><IoAddOutline/></button>
+            </form>}
         </section>
     )
 }

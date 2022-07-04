@@ -1,7 +1,8 @@
 export const groupService = {
     query,
     updateGroup,
-    removeProdFromGroup
+    removeProdFromGroup,
+    deleteGroup
 }
 
 
@@ -45,7 +46,47 @@ const gGroups = [
                 priority: 1
             },
         ]
-    }
+    },
+    {
+        id: 'g102',
+        title: 'Camping list',
+        createdAt: Date.now() - 100000000,
+        updatedAt: '',
+        products: [
+            {
+                id: 'p111',
+                title: 'Tent',
+                isDone: false,
+                color: '#000000',
+                description: '',
+                priority: 1
+            },
+            {
+                id: 'p112',
+                title: 'Bag',
+                isDone: false,
+                color: '#000000',
+                description: '',
+                priority: 1
+            },
+            {
+                id: 'p113',
+                title: 'Gas',
+                isDone: false,
+                color: '#000000',
+                description: '',
+                priority: 1
+            },
+            {
+                id: 'p114',
+                title: 'Mangal',
+                isDone: false,
+                color: '#000000',
+                description: '',
+                priority: 1
+            },
+        ]
+    },
 ]
 
 
@@ -62,7 +103,7 @@ async function updateGroup(groupId, updatedProduct) {
         const group = groups[groupIdx]
         if (!updatedProduct.id) {
             group.products.push(_createProd(updatedProduct.title))
-        }else {
+        } else {
             const prevProdIdx = group.products.findIndex(product => product.id === updatedProduct.id)
             group.products.splice(prevProdIdx, 1, updatedProduct)
         }
@@ -85,6 +126,19 @@ async function removeProdFromGroup(groupId, prodId) {
         console.error(err)
     }
     console.log('gGroups', gGroups);
+}
+
+async function deleteGroup(groupId) {
+    console.log('groupId', groupId);
+    try {
+        const groups = await query()
+        const groupIdx = getGroupIdxBy(groupId)
+        groups.splice(groupIdx, 1)
+        return
+
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 function getGroupIdxBy(id) {

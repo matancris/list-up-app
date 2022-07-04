@@ -2,6 +2,11 @@
     box-shadow: #ccc 0px 0px 3px 1px;
     border-radius: 10px;
     padding: 10px;
+    margin: 0 0 1rem;
+
+    .group-header:not(.m-0) {
+        margin: 0 0 1rem;
+    }
 
 
     .add-prod-form {
@@ -12,16 +17,19 @@
 
     h1 {
         cursor: pointer;
+        user-select: none;
+        flex: 1;
+        margin: 0;
     }
 
     .prod-prev-container {
         height: 0;
         overflow: hidden;
-        user-select: none;
 
         &.open {
             height: auto;
         }
     }
+
 
 }
