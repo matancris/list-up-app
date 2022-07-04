@@ -15,7 +15,7 @@
         cursor: pointer;
     }
 
-    @include for-normal-layout {
+    // @include for-normal-layout {
 
         .action-btn-container {
             visibility: hidden;
@@ -28,6 +28,6 @@
             visibility: visible;
             opacity: 1;
         }
-    }
+    // }
 
 }
