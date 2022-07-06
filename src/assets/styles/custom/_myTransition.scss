@@ -3,7 +3,7 @@
     user-select: none;
     &.accordion {
         // margin-bottom: 20px;
-        border-radius: 5px;
+        border-radius: $border-radius-size;
         .header {
             width: fit-content;
             position: relative;

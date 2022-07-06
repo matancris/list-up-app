@@ -1,0 +1,55 @@
+.add-group-filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  .add-group-btn {
+    padding-inline-end: 10px;
+  }
+
+  .add-group-form {
+    background-color: #fff;
+    border-radius: $border-radius-size;
+    padding: 20px 20px 10px 20px;
+    height: 200px;
+    width: 300px;
+
+    input {
+     padding: 10px;
+    }
+
+    .UI-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-container {
+      align-self: flex-end;
+
+      .submit-btn {
+        background: $clr5;
+        color: #fff;
+        padding: 10px;
+        padding-inline: 15px;
+        border-radius: $border-radius-size;
+      }
+
+      .cancel-btn {
+        all: unset;
+        margin-inline-end: 10px;
+        color: $clr5;
+        letter-spacing: 1px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  cursor: pointer;
+}

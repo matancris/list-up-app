@@ -4,16 +4,18 @@ import { ProductPreview } from './ProductPreview'
 // Icons import
 import { MdOutlineDelete } from 'react-icons/md';
 import { IoAddOutline } from 'react-icons/io5';
+import { BiDotsHorizontalRounded } from 'react-icons/bi';
 
-export function GroupPreview({ group, onUpdateGroup, onRemoveProd, onDeleteGroup }) {
+export function GroupPreview({ group, onUpdateGroup, onDeleteGroup }) {
     const [newProd, setNewProd] = useState({ title: '' })
     const [isOpen, setIsOpen] = useState(true)
+    const [isMenuOpen, setIsMenueOpen] = useState(false)
 
     const onUpdateProd = (updatedProduct) => {
         onUpdateGroup(group.id, updatedProduct)
     }
     const onDeleteProd = (prodId) => {
-        onRemoveProd(group.id, prodId)
+        onUpdateGroup(group.id, null, prodId)
     }
 
     const handleInput = ({ target }) => {
@@ -30,13 +32,21 @@ export function GroupPreview({ group, onUpdateGroup, onRemoveProd, onDeleteGroup
         setNewProd({ title: '' })
     }
 
+    const openCloseMenue = () => {
+        setIsMenueOpen(true)
+        setTimeout(() => setIsMenueOpen(false), 3000)
+    }
+
     return (
         <section className="group-preview">
             <div className={`group-header flex ${!isOpen ? 'm-0' : ''}`}  >
-                <h1  onClick={() => setIsOpen(!isOpen)} title="Open\Close list">{group.title}</h1>
+                <h1 onClick={() => setIsOpen(!isOpen)} title="Open\Close list">{group.title}</h1>
                 <div className="action-btn-container flex">
                     {/* <button onMouseDown={onEdit}>Edit</button> */}
-                    <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete/></button>
+                    {isMenuOpen ?
+                        <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete /></button> :
+                        <button className="dots-menu-btn" onClick={() => openCloseMenue()}><BiDotsHorizontalRounded /></button>
+                    }
                 </div>
 
             </div>
@@ -54,7 +64,7 @@ export function GroupPreview({ group, onUpdateGroup, onRemoveProd, onDeleteGroup
             </article>
             {isOpen && <form className="add-prod-form flex" onSubmit={onAddProd}>
                 <input type="text" name="title" id="" onChange={handleInput} value={newProd.title} />
-                <button className='add-btn'><IoAddOutline/></button>
+                <button className='add-btn'><IoAddOutline /></button>
             </form>}
         </section>
     )

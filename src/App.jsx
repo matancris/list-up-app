@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className={`App ${isHebrew ? 'rtl' : ''}`}>
-      <AppHeader className="App-header " changeLang={changeLang}>
+      <AppHeader className="App-header " changeLang={changeLang} isHebrew={isHebrew}>
         Header
       </AppHeader>
       <Routes>

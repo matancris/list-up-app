@@ -5,12 +5,17 @@ import { RiEditLine } from 'react-icons/ri';
 
 export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
 
-    const [updatedProd, setUpdatedProduct] = useState({ ...product })
+    const [updatedProd, setUpdatedProduct] = useState(product)
     const [isEditMode, setIsEditMode] = useState(false)
 
     const titleRef = useRef()
+    const isFirstRender = useRef(true);
 
     useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
         onUpdateProd(updatedProd)
     }, [updatedProd])
 
@@ -29,12 +34,10 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
         setIsEditMode(!isEditMode)
     }
 
-
-
     return (
         <section className={`product-preview flex space-between align-center ${product.isDone ? 'done' : ''}`}>
             <label className='flex align-center' htmlFor={`check-${product.id}`}>
-                <input type="checkbox" name="isDone" id={`check-${product.id}`} onChange={handleChange} value={updatedProd.isDone} />
+                <input type="checkbox" name="isDone" id={`check-${product.id}`} onChange={handleChange} checked={updatedProd.isDone} />
                 {!isEditMode &&
                     <h2>{product.title}</h2>}
                 {isEditMode &&
@@ -48,8 +51,8 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
                     />}
             </label>
             <div className="action-btn-container flex">
-                <button onMouseDown={onEdit}><RiEditLine/></button>
-                <button onClick={() => onDeleteProd(product.id)}><MdOutlineDelete/></button>
+                <button onMouseDown={onEdit}><RiEditLine /></button>
+                <button onClick={() => onDeleteProd(product.id)}><MdOutlineDelete /></button>
             </div>
         </section>
     )

@@ -11,7 +11,7 @@
     }
 
     h2 {
-        margin-inline-start: 5px;
+        margin-inline-start: 0.5rem;
         cursor: pointer;
     }
 
@@ -29,5 +29,9 @@
             opacity: 1;
         }
     // }
+
+    input[type=checkbox]{
+        margin: 0;
+    }
 
 }
