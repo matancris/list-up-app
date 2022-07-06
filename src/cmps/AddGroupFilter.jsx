@@ -42,8 +42,7 @@ export function AddGroupFilter({ addGroup }) {
                     <article className="add-group-modal">
                         <form className="add-group-form flex column space-between" onSubmit={onAddGroup}>
                             <h2 className="add-form-title">Add list</h2>
-                            {/* <input type="text" name="title" placeholder="List name" onChange={handleInput} value={newGroup.title} ref={inputRef} onBlur={(ev) => closeForm(ev)} /> */}
-                            <input type="text" name="title" placeholder="List name" onChange={handleInput} value={newGroup.title} ref={inputRef} />
+                            <input type="text" name="title" placeholder="List name" onChange={handleInput} value={newGroup.title} ref={inputRef} onBlur={(ev) => closeForm(ev)} />
                             <div className="UI-wrapper">
                                 <UILine />
                                 <div className="btn-container flex">
