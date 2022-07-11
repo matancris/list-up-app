@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MdOutlineDelete } from 'react-icons/md';
 import { RiEditLine } from 'react-icons/ri';
 
-
 export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
 
     const [updatedProd, setUpdatedProduct] = useState(product)
@@ -22,7 +21,6 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
     useEffect(() => {
         isEditMode && titleRef.current.focus()
     }, [isEditMode])
-
 
     const handleChange = ({ target }) => {
         const { type, name, value } = target

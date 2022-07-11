@@ -43,11 +43,12 @@ export function AddGroupFilter({ addGroup }) {
                         <form className="add-group-form flex column space-between" onSubmit={onAddGroup}>
                             <h2 className="add-form-title">Add list</h2>
                             <input type="text" name="title" placeholder="List name" onChange={handleInput} value={newGroup.title} ref={inputRef} onBlur={(ev) => closeForm(ev)} />
+                            {/* <input type="text" name="title" placeholder="List name" onChange={handleInput} value={newGroup.title} ref={inputRef} /> */}
                             <div className="UI-wrapper">
                                 <UILine />
                                 <div className="btn-container flex">
-                                    <button className="cancel-btn" onClick={closeForm}>Cancel</button>
-                                    <button className="submit-btn" type="submit">Save</button>
+                                    <button type="button" className="cancel-btn" onClick={closeForm}>Cancel</button>
+                                    <button type="submit" className="submit-btn">Save</button>
                                 </div>
                             </div>
                         </form>

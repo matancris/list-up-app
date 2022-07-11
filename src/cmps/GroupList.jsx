@@ -1,12 +1,12 @@
 import React from 'react'
 import { GroupPreview } from './GroupPreview'
 
-export function GroupList({ groups, onUpdateGroup, onRemoveProd, onDeleteGroup }) {
+export function GroupList({ groups, onUpdateGroup, onDeleteGroup }) {
     return (
         <section>
             {
                 groups.map(group => (
-                    <GroupPreview group={group} key={group.id} onUpdateGroup={onUpdateGroup} onRemoveProd={onRemoveProd} onDeleteGroup={onDeleteGroup}/>
+                    <GroupPreview group={group} key={group.id} onUpdateGroup={onUpdateGroup} onDeleteGroup={onDeleteGroup}/>
                 ))
             }
         </section>

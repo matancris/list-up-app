@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 aws.config.ts
+firebase.config.js
 
 # testing
 /coverage

@@ -14,6 +14,7 @@ export function GroupPreview({ group, onUpdateGroup, onDeleteGroup }) {
     const onUpdateProd = (updatedProduct) => {
         onUpdateGroup(group.id, updatedProduct)
     }
+
     const onDeleteProd = (prodId) => {
         onUpdateGroup(group.id, null, prodId)
     }
@@ -42,13 +43,11 @@ export function GroupPreview({ group, onUpdateGroup, onDeleteGroup }) {
             <div className={`group-header flex ${!isOpen ? 'm-0' : ''}`}  >
                 <h1 onClick={() => setIsOpen(!isOpen)} title="Open\Close list">{group.title}</h1>
                 <div className="action-btn-container flex">
-                    {/* <button onMouseDown={onEdit}>Edit</button> */}
                     {isMenuOpen ?
                         <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete /></button> :
                         <button className="dots-menu-btn" onClick={() => openCloseMenue()}><BiDotsHorizontalRounded /></button>
                     }
                 </div>
-
             </div>
             <article className={`prod-prev-container flex column ${isOpen ? 'open' : ''}`}>
                 {
@@ -60,7 +59,6 @@ export function GroupPreview({ group, onUpdateGroup, onDeleteGroup }) {
                             onDeleteProd={onDeleteProd} />
                     ))
                 }
-
             </article>
             {isOpen && <form className="add-prod-form flex" onSubmit={onAddProd}>
                 <input type="text" name="title" id="" onChange={handleInput} value={newProd.title} />

@@ -21,8 +21,11 @@
             visibility: hidden;
             opacity: 0;
             transition: .3s;
-        }
 
+            &>*:not(:last-child) {
+                margin-inline-end: 0.5rem;
+            }
+        }
 
         &:hover .action-btn-container {
             visibility: visible;
