@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import 'dotenv/config' 
 
 
 // AWS Config
