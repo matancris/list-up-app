@@ -94,6 +94,14 @@ export const groupSlice = createSlice({
             .addMatcher(isFulfilledAction, (state, action) => {
                 state.status = 'success'
             })
+    }
+})
+
+
+export default groupSlice.reducer
+
+
+// DEPRECATED
 
 
         // .addCase(removeGroup.rejected, (state, action) => {
@@ -120,10 +128,3 @@ export const groupSlice = createSlice({
         //     state.status = 'success'
         //     state.groups = payload
         // },
-    }
-})
-
-
-export default groupSlice.reducer
-
-
