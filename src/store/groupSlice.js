@@ -83,7 +83,7 @@ export const groupSlice = createSlice({
             .addCase(addGroup.fulfilled, (state, { payload }) => {
                 state.groups.push(payload)
             })
-            
+
             // Matchers for pending, fulfilled, and rejected actions
             .addMatcher(isPendingAction, (state, action) => {
                 state.status = 'loading'
@@ -116,6 +116,22 @@ export default groupSlice.reducer
         //     // const prevProdIdx = state.groups[groupIdx].products.findIndex(product => product.id === action.meta.arg.updatedProduct.id)
         //     // state.groups[groupIdx].products.splice(prevProdIdx, 1, action.meta.arg.updatedProduct)
         //     state.status = 'loading'
+        // })
+        // .addMatcher(isPendingAction, (state, action) => {
+        //     if (action.type === 'groups/updateGroup/pending') {
+        //         const groupIdx = state.groups.findIndex(group => group.id === action.meta.arg.groupId)
+        //         const prevProdIdx = state.groups[groupIdx].products.findIndex(product => product.id === action.meta.arg.updatedProduct.id)
+        //         state.prevGroups = [...state.groups]
+        //         state.groups[groupIdx].products.splice(prevProdIdx, 1, action.meta.arg.updatedProduct)
+        //     }
+        //     state.status = 'loading'
+        // })
+        // .addMatcher(isRejectedAction, (state, action) => {
+        //     if (action.type === 'groups/updateGroup/rejected') {
+        //         state.groups = [...state.prevGroups]
+        //     }
+
+        //     state.status = 'error'
         // })
         // [updateGroup.pending]: (state, action) => {
         //     const groupIdx = state.groups.findIndex(group => group.id === action.meta.arg.groupId)

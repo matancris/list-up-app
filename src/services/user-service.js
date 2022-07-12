@@ -10,9 +10,12 @@ export const userService = {
     query,
     remove,
     logout,
+    setUserPref,
+    getUserPref
 }
 
 const STORAGE_KEY = 'loggedinUser'
+const USER_PREFS_KEY = 'userPrefs'
 
 let users = [
     {
@@ -84,12 +87,19 @@ function logout() {
 
 function getUser() {
     var user = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
-    if (!user){
+    if (!user) {
         user = users[1];
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user))
-    } 
+    }
     // return getGuestMode();
     return user;
+}
+
+function setUserPref(userPrefs) {
+    localStorage.setItem(USER_PREFS_KEY, JSON.stringify(userPrefs))
+}
+function getUserPref() {
+    return JSON.parse(localStorage.getItem(USER_PREFS_KEY))
 }
 
 // function addReqToAdmin(memberReq) {

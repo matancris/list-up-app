@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MdOutlineDelete } from 'react-icons/md';
 import { RiEditLine } from 'react-icons/ri';
 
+
 export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
 
     const [updatedProd, setUpdatedProduct] = useState(product)
@@ -33,7 +34,7 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
     }
 
     return (
-        <section className={`product-preview flex space-between align-center ${product.isDone ? 'done' : ''}`}>
+        <section className={`product-preview flex space-between align-center ${updatedProd.isDone ? 'done' : ''}`}>
             <label className='flex align-center' htmlFor={`check-${product.id}`}>
                 <input type="checkbox" name="isDone" id={`check-${product.id}`} onChange={handleChange} checked={updatedProd.isDone} />
                 {!isEditMode &&

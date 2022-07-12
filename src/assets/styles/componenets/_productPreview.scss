@@ -6,7 +6,7 @@
         order: 1;
     }
 
-    &.done>*:not(.action-btn-container, ::before) {
+    &.done h2{
         text-decoration: line-through;
     }
 

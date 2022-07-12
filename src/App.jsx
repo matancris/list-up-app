@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppHeader } from './cmps/AppHeader';
 import ShopApp from './pages/ShopApp';
+import { userService } from './services/user-service';
 
 
 function App() {
@@ -9,10 +10,14 @@ function App() {
 
   useEffect(() => {
     console.log(isHebrew)
+    const userPref = userService.getUserPref()
+    console.log('useEffect ~ userPref', userPref)
+    setIsHebrew(userPref.lang === 'Hebrew')
   }, [isHebrew])
 
   const changeLang = ({ target }) => {
     setIsHebrew(target.value === 'Hebrew')
+    userService.setUserPref({ lang: target.value })
   }
 
 
