@@ -99,6 +99,13 @@ function setUserPref(userPrefs) {
     localStorage.setItem(USER_PREFS_KEY, JSON.stringify(userPrefs))
 }
 function getUserPref() {
+    const userPref = JSON.parse(localStorage.getItem(USER_PREFS_KEY))
+    if (!userPref) {
+        setUserPref({
+            theme: 'light',
+            lang: 'English'
+        })
+    }
     return JSON.parse(localStorage.getItem(USER_PREFS_KEY))
 }
 
