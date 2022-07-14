@@ -1,18 +1,20 @@
-import { addDoc, collection, doc, getDoc, getDocs, updateDoc, deleteDoc } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, getDocs, updateDoc, deleteDoc, orderBy, query } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { utilService } from './util-service';
 
 const groupCol = collection(db, 'group');
 
 export const groupService = {
-    query,
+    getGroups,
     updateGroup,
     addGroup,
-    deleteGroup
+    deleteGroup,
+    changeGroupIdx
 }
 
-async function query() {
-    const groupSnapshot = await getDocs(groupCol);
+async function getGroups() {
+    const groupQuery = query(groupCol, orderBy('order'));
+    const groupSnapshot = await getDocs(groupQuery);
     const groups = groupSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
     return groups;
 }
@@ -60,12 +62,32 @@ async function addGroup(groupToAdd) {
             createdAt: Date.now(),
             updatedAt: '',
             products: [],
+            order: 0
         }
 
         const groupSnapshot = await addDoc(groupCol, newGroup)
         return { ...newGroup, id: groupSnapshot.id }
     } catch (err) {
         console.error(err)
+    }
+}
+
+async function changeGroupIdx(prevIdx, newIdx) {
+    try {
+        const groups = await getGroups();
+        // const groupToMove = groups.splice(prevIdx, 1)[0];
+        // groups.splice(newIdx, 0, groupToMove);
+
+        const prevGroup = groups[prevIdx];
+        const newGroup = groups[newIdx];
+        const prevGroupRef = doc(db, 'group', prevGroup.id);
+        const newGroupRef = doc(db, 'group', newGroup.id);
+        await Promise.all(
+            [updateDoc(prevGroupRef, { order: newIdx }),
+            updateDoc(newGroupRef, { order: prevIdx })])
+        return Promise.resolve()
+    } catch (err) {
+        throw new Error(err)
     }
 }
 

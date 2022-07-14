@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { GroupList } from '../cmps/GroupList'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { addGroup, getGroups, removeGroup, updateGroup } from '../store/groupSlice'
+import { addGroup, changeGroupIdx, getGroups, removeGroup, updateGroup } from '../store/groupSlice'
 import { AddGroupFilter } from '../cmps/AddGroupFilter'
+import { DragDropContext } from 'react-beautiful-dnd';
+import { useCallback } from 'react'
 
 
 export default function ShopApp() {
@@ -25,10 +27,19 @@ export default function ShopApp() {
     dispatch(addGroup(group))
   }
 
+  const onDragEnd = useCallback((ev) => {
+    const prevIdx = ev.source.index
+    const newIdx = ev.destination.index
+    console.log('onDragEnd ~ newIdx', newIdx)
+    dispatch(changeGroupIdx({ prevIdx, newIdx }))
+  }, [dispatch]);
+
   return (
     <section className="shop-app main-container">
       <AddGroupFilter addGroup={onAddGroup} />
-      <GroupList groups={groups} onUpdateGroup={onUpdateGroup} onDeleteGroup={onRemoveGroup} />
+      <DragDropContext onDragEnd={onDragEnd}>
+        <GroupList groups={groups} onUpdateGroup={onUpdateGroup} onDeleteGroup={onRemoveGroup} />
+      </DragDropContext>
     </section>
   )
 }

@@ -16,7 +16,7 @@ export const getGroups = createAsyncThunk(
     'groups/getGroups',
     async (dispatch, thunkAPI) => {
         try {
-            const groupsToShow = await groupService.query()
+            const groupsToShow = await groupService.getGroups()
             return groupsToShow;
         } catch (err) {
             console.error(err)
@@ -46,19 +46,19 @@ export const addGroup = createAsyncThunk(
 
 export const updateGroup = createAsyncThunk(
     'groups/updateGroup',
-    async ({ groupId, updatedProduct, prodToRemoveId, groupIdx }, thunkAPI) => {
+    async ({ groupId, updatedProduct, prodToRemoveId }, thunkAPI) => {
         const updatedGroup = await groupService.updateGroup(groupId, updatedProduct, prodToRemoveId)
         return updatedGroup;
     }
 )
-
-// export const removeProdFromGroup = createAsyncThunk(
-//     'groups/removeProdFromGroup',
-//     async ({ groupId, prodId }, thunkAPI) => {
-//         const updatedGroups = await groupService.removeProdFromGroup(groupId, prodId)
-//         return updatedGroups;
-//     }
-// )
+export const changeGroupIdx = createAsyncThunk(
+    'groups/changeGroupIdx',
+    async ({ prevIdx, newIdx }, thunkAPI) => {
+        console.log('thunkAPI', thunkAPI)
+        groupService.changeGroupIdx(prevIdx, newIdx)
+        return { prevIdx, newIdx };
+    }
+)
 
 export const groupSlice = createSlice({
     name: 'groups',
@@ -68,20 +68,22 @@ export const groupSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getGroups.fulfilled, (state, action) => {
-                state.groups = action.payload
+            .addCase(getGroups.fulfilled, (state, { payload }) => {
+                state.groups = payload
             })
             .addCase(removeGroup.fulfilled, (state, { payload }) => {
                 state.groups = state.groups.filter(group => group.id !== payload)
             })
-
             .addCase(updateGroup.fulfilled, (state, { payload }) => {
                 const groupIdx = state.groups.findIndex(group => group.id === payload.id)
                 state.groups[groupIdx] = payload
             })
-
             .addCase(addGroup.fulfilled, (state, { payload }) => {
                 state.groups.push(payload)
+            })
+            .addCase(changeGroupIdx.fulfilled, (state, { payload }) => {
+                const groupToMove = state.groups.splice(payload.prevIdx, 1)[0];
+                state.groups.splice(payload.newIdx, 0, groupToMove);
             })
 
             // Matchers for pending, fulfilled, and rejected actions
@@ -144,3 +146,10 @@ export default groupSlice.reducer
         //     state.status = 'success'
         //     state.groups = payload
         // },
+        // export const removeProdFromGroup = createAsyncThunk(
+        //     'groups/removeProdFromGroup',
+        //     async ({ groupId, prodId }, thunkAPI) => {
+        //         const updatedGroups = await groupService.removeProdFromGroup(groupId, prodId)
+        //         return updatedGroups;
+        //     }
+        // )

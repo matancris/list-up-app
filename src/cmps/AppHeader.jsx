@@ -21,7 +21,7 @@ export function AppHeader({ changeLang, isHebrew }) {
                 </nav>
                 <select onChange={changeLang} value={isHebrew ? 'Hebrew' : 'English'}>
                     <option>English</option>
-                    <option >Hebrew</option>
+                    <option>Hebrew</option>
                 </select>
                 {loggedinUser &&
                     <div className="user-title flex align-center" >

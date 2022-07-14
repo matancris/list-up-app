@@ -9,23 +9,12 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 
 
-// AWS Config
-// import * as AWS from 'aws-sdk'
-// import { configuration } from './aws.config.ts'
-
-// AWS.config.update(configuration)
-
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
   <Provider store={store}>
-    {/* <FirestoreProvider firebase={firebase} {...firebaseConfig}> */}
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    {/* </FirestoreProvider>, */}
   </Provider>,
 );
 

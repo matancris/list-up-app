@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { ProductPreview } from './ProductPreview'
+import { Draggable } from 'react-beautiful-dnd';
 
 // Icons import
 import { MdOutlineDelete } from 'react-icons/md';
 import { IoAddOutline } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 
-export function GroupPreview({ group, onUpdateGroup, onDeleteGroup }) {
+export function GroupPreview({ group, onUpdateGroup, onDeleteGroup, idx }) {
     const [newProd, setNewProd] = useState({ title: '' })
     const [isOpen, setIsOpen] = useState(true)
     const [isMenuOpen, setIsMenueOpen] = useState(false)
@@ -39,31 +40,40 @@ export function GroupPreview({ group, onUpdateGroup, onDeleteGroup }) {
     }
 
     return (
-        <section className="group-preview">
-            <div className={`group-header flex ${!isOpen ? 'm-0' : ''}`}  >
-                <h1 onClick={() => setIsOpen(!isOpen)} title="Open\Close list">{group.title}</h1>
-                <div className="action-btn-container flex">
-                    {isMenuOpen ?
-                        <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete /></button> :
-                        <button className="dots-menu-btn" onClick={() => openCloseMenue()}><BiDotsHorizontalRounded /></button>
-                    }
-                </div>
-            </div>
-            <article className={`prod-prev-container flex column ${isOpen ? 'open' : ''}`}>
-                {
-                    group.products.map((product) => (
-                        <ProductPreview
-                            product={product}
-                            key={product.id}
-                            onUpdateProd={onUpdateProd}
-                            onDeleteProd={onDeleteProd} />
-                    ))
-                }
-            </article>
-            {isOpen && <form className="add-prod-form flex" onSubmit={onAddProd}>
-                <input type="text" name="title" id="" onChange={handleInput} value={newProd.title} />
-                <button className='add-btn'><IoAddOutline /></button>
-            </form>}
-        </section>
+        <Draggable draggableId={group.id} index={idx}>
+            {(provided, snapshot) => (
+                <section
+                    className="group-preview"
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    <div className={`group-header flex ${!isOpen ? 'm-0' : ''}`}  >
+                        <h1 onClick={() => setIsOpen(!isOpen)} title="Open\Close list">{group.title}</h1>
+                        <div className="action-btn-container flex">
+                            {isMenuOpen ?
+                                <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete /></button> :
+                                <button className="dots-menu-btn" onClick={() => openCloseMenue()}><BiDotsHorizontalRounded /></button>
+                            }
+                        </div>
+                    </div>
+                    <article className={`prod-prev-container flex column ${isOpen ? 'open' : ''}`}>
+                        {
+                            group.products.map((product) => (
+                                <ProductPreview
+                                    product={product}
+                                    key={product.id}
+                                    onUpdateProd={onUpdateProd}
+                                    onDeleteProd={onDeleteProd} />
+                            ))
+                        }
+                    </article>
+                    {isOpen && <form className="add-prod-form flex" onSubmit={onAddProd}>
+                        <input type="text" name="title" id="" onChange={handleInput} value={newProd.title} />
+                        <button className='add-btn'><IoAddOutline /></button>
+                    </form>}
+                </section>
+            )}
+        </Draggable>
     )
 }
