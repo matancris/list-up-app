@@ -9,9 +9,7 @@ function App() {
   const [isHebrew, setIsHebrew] = useState(false)
 
   useEffect(() => {
-    console.log(isHebrew)
     const userPref = userService.getUserPref()
-    console.log('useEffect ~ userPref', userPref)
     setIsHebrew(userPref.lang === 'Hebrew')
   }, [isHebrew])
 

@@ -54,7 +54,6 @@ export const updateGroup = createAsyncThunk(
 export const changeGroupIdx = createAsyncThunk(
     'groups/changeGroupIdx',
     async ({ prevIdx, newIdx }, thunkAPI) => {
-        console.log('thunkAPI', thunkAPI)
         groupService.changeGroupIdx(prevIdx, newIdx)
         return { prevIdx, newIdx };
     }

@@ -9,7 +9,6 @@ export function AppHeader({ changeLang, isHebrew }) {
     useEffect(() => {
         const user = userService.getUser()
         setloggedInUser(user)
-        console.log('user', user);
     }, [])
 
     return (

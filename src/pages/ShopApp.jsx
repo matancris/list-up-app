@@ -30,7 +30,6 @@ export default function ShopApp() {
   const onDragEnd = useCallback((ev) => {
     const prevIdx = ev.source.index
     const newIdx = ev.destination.index
-    console.log('onDragEnd ~ newIdx', newIdx)
     dispatch(changeGroupIdx({ prevIdx, newIdx }))
   }, [dispatch]);
 
