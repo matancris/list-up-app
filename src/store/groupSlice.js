@@ -59,7 +59,7 @@ export const changeGroupIdx = createAsyncThunk(
     }
 )
 
-export const groupSlice = createSlice({
+const groupSlice = createSlice({
     name: 'groups',
     initialState: {
         groups: [],

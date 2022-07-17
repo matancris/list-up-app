@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { AppHeader } from './cmps/AppHeader';
 import ShopApp from './pages/ShopApp';
-import { userService } from './services/user-service';
+import { setUserPref } from './store/userSlice';
 
 
 function App() {
   const [isHebrew, setIsHebrew] = useState(false)
+  const dispatch = useDispatch()
+  const { userPref } = useSelector(state => state.users)
 
   useEffect(() => {
-    const userPref = userService.getUserPref()
     setIsHebrew(userPref.lang === 'Hebrew')
-  }, [isHebrew])
+  }, [userPref])
 
   const changeLang = ({ target }) => {
-    setIsHebrew(target.value === 'Hebrew')
-    userService.setUserPref({ lang: target.value })
+    dispatch(setUserPref({ lang: target.value }))
+    setIsHebrew(userPref.lang === 'Hebrew')
   }
 
 
