@@ -8,6 +8,13 @@
         margin: 0 0 1rem;
     }
 
+    .action-btn-menu {
+
+        &>*:not(:last-child) {
+            margin-inline-end: 0.5rem;
+        }
+    }
+
     .add-prod-form {
         display: flex;
 
@@ -54,6 +61,7 @@
     ::-webkit-scrollbar-track {
         background-color: #eeeeee70;
         border-radius: 100px;
+        margin-bottom: 5px;
     }
 
     ::-webkit-scrollbar-thumb {

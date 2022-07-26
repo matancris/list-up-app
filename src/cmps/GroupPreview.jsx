@@ -6,6 +6,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { MdOutlineDelete } from 'react-icons/md';
 import { IoAddOutline } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
+import { RiCheckboxIndeterminateLine } from 'react-icons/ri';
 
 export function GroupPreview({ group, onUpdateGroup, onDeleteGroup, idx }) {
     const [newProd, setNewProd] = useState({ title: '' })
@@ -34,7 +35,12 @@ export function GroupPreview({ group, onUpdateGroup, onDeleteGroup, idx }) {
         setNewProd({ title: '' })
     }
 
-    const openCloseMenue = () => {
+    const onUnmarkAll = () => {
+        onUpdateGroup(group.id)
+        setNewProd({ title: '' })
+    }
+
+    const openCloseMenu = () => {
         setIsMenueOpen(true)
         setTimeout(() => setIsMenueOpen(false), 3000)
     }
@@ -51,9 +57,14 @@ export function GroupPreview({ group, onUpdateGroup, onDeleteGroup, idx }) {
                     <div className={`group-header flex ${!isOpen ? 'm-0' : ''}`}  >
                         <h1 onClick={() => setIsOpen(!isOpen)} title="Open\Close list">{group.title}</h1>
                         <div className="action-btn-container flex">
-                            {isMenuOpen ?
-                                <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete /></button> :
-                                <button className="dots-menu-btn" onClick={() => openCloseMenue()}><BiDotsHorizontalRounded /></button>
+                            {isMenuOpen &&
+                                <div className="action-btn-menu flex">
+                                    <button onClick={() => onUnmarkAll(group.id)}><RiCheckboxIndeterminateLine /></button>
+                                    <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete /></button>
+                                </div>
+                            }
+                            {!isMenuOpen &&
+                                <button className="dots-menu-btn" onClick={() => openCloseMenu()}><BiDotsHorizontalRounded /></button>
                             }
                         </div>
                     </div>

@@ -51,6 +51,7 @@ export const updateGroup = createAsyncThunk(
         return updatedGroup;
     }
 )
+
 export const changeGroupIdx = createAsyncThunk(
     'groups/changeGroupIdx',
     async ({ prevIdx, newIdx }, thunkAPI) => {
@@ -85,6 +86,7 @@ const groupSlice = createSlice({
                 state.groups.splice(payload.newIdx, 0, groupToMove);
             })
 
+
             // Matchers for pending, fulfilled, and rejected actions
             .addMatcher(isPendingAction, (state, action) => {
                 state.status = 'loading'
@@ -117,6 +119,10 @@ export default groupSlice.reducer
         //     // const prevProdIdx = state.groups[groupIdx].products.findIndex(product => product.id === action.meta.arg.updatedProduct.id)
         //     // state.groups[groupIdx].products.splice(prevProdIdx, 1, action.meta.arg.updatedProduct)
         //     state.status = 'loading'
+        // })
+        // .addCase(unMarkAllProd.fulfilled, (state, { payload }) => {
+        //     const groupIdx = state.groups.findIndex(group => group.id === payload.id)
+        //     state.groups[groupIdx].products.forEach(prod => prod.isDone = false)
         // })
         // .addMatcher(isPendingAction, (state, action) => {
         //     if (action.type === 'groups/updateGroup/pending') {
@@ -151,4 +157,13 @@ export default groupSlice.reducer
         //         const updatedGroups = await groupService.removeProdFromGroup(groupId, prodId)
         //         return updatedGroups;
         //     }
+        
+        // export const unMarkAllProd = createAsyncThunk(
+        //     'groups/unMarkAllProd',
+        //     async ({ groupId }, thunkAPI) => {
+        //         const updatedGroup = await groupService.unMarkAllProd(groupId)
+        //         return updatedGroup;
+        //     }
+        // )
+
         // )

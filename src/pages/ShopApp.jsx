@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { GroupList } from '../cmps/GroupList'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { addGroup, changeGroupIdx, getGroups, removeGroup, updateGroup } from '../store/groupSlice'
+import { addGroup, changeGroupIdx, getGroups, removeGroup, unMarkAllProd, updateGroup } from '../store/groupSlice'
 import { AddGroupFilter } from '../cmps/AddGroupFilter'
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useCallback } from 'react'

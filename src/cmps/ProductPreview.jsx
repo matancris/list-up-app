@@ -5,7 +5,7 @@ import { RiEditLine } from 'react-icons/ri';
 
 export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
 
-    const [updatedProd, setUpdatedProduct] = useState(product)
+    const [updatedProd, setUpdatedProduct] = useState({...product})
     const [isEditMode, setIsEditMode] = useState(false)
 
     const titleRef = useRef()
@@ -34,9 +34,9 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
     }
 
     return (
-        <section className={`product-preview flex space-between align-center ${updatedProd.isDone ? 'done' : ''}`}>
+        <section className={`product-preview flex space-between align-center ${product.isDone ? 'done' : ''}`}>
             <label className='flex align-center' htmlFor={`check-${product.id}`}>
-                <input type="checkbox" name="isDone" id={`check-${product.id}`} onChange={handleChange} checked={updatedProd.isDone} />
+                <input type="checkbox" name="isDone" id={`check-${product.id}`} onChange={handleChange} checked={product.isDone} />
                 {!isEditMode &&
                     <h2>{product.title}</h2>}
                 {isEditMode &&

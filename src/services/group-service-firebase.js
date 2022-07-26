@@ -9,7 +9,7 @@ export const groupService = {
     updateGroup,
     addGroup,
     deleteGroup,
-    changeGroupIdx
+    changeGroupIdx,
 }
 
 async function getGroups() {
@@ -31,6 +31,9 @@ async function updateGroup(groupId, updatedProduct = null, prodToRemoveId = null
             products = products.filter(prod => prod.id !== prodToRemoveId)
         } else if (updatedProduct && !updatedProduct.id) {
             products.push(_createProd(updatedProduct.title))
+
+        } else if (!updatedProduct && !prodToRemoveId) { // Unmark all the products
+            products.forEach(prod => prod.isDone = false)
         } else {
             const prevProdIdx = products.findIndex(product => product.id === updatedProduct.id)
             products.splice(prevProdIdx, 1, updatedProduct)
