@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { GroupList } from '../cmps/GroupList'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { addGroup, changeGroupIdx, getGroups, removeGroup, unMarkAllProd, updateGroup } from '../store/groupSlice'
+import { addGroup, changeGroupIdx, getGroups, removeGroup, updateGroup } from '../store/groupSlice'
 import { AddGroupFilter } from '../cmps/AddGroupFilter'
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useCallback } from 'react'
@@ -15,6 +15,7 @@ export default function ShopApp() {
     dispatch(getGroups())
   }, [dispatch])
 
+
   const onUpdateGroup = async (groupId, updatedProduct, prodToRemoveId) => {
     dispatch(updateGroup({ groupId, updatedProduct, prodToRemoveId }))
   }
@@ -23,8 +24,9 @@ export default function ShopApp() {
     dispatch(removeGroup(groupId))
   }
 
-  const onAddGroup = async (group) => {
-    dispatch(addGroup(group))
+  const onAddGroup = async (group, isDuplicate) => {
+    console.log('onAddGroup ~ group', group)
+    dispatch(addGroup({ group, isDuplicate }))
   }
 
   const onDragEnd = useCallback((ev) => {
@@ -37,7 +39,7 @@ export default function ShopApp() {
     <section className="shop-app main-container">
       <AddGroupFilter addGroup={onAddGroup} />
       <DragDropContext onDragEnd={onDragEnd}>
-        <GroupList groups={groups} onUpdateGroup={onUpdateGroup} onDeleteGroup={onRemoveGroup} />
+        <GroupList groups={groups} onUpdateGroup={onUpdateGroup} onDeleteGroup={onRemoveGroup} onDuplicateGroup={onAddGroup} />
       </DragDropContext>
     </section>
   )

@@ -38,8 +38,8 @@ export const removeGroup = createAsyncThunk(
 
 export const addGroup = createAsyncThunk(
     'groups/addGroup',
-    async (group, thunkAPI) => {
-        const newGroup = await groupService.addGroup(group)
+    async ({group, isDuplicate}, thunkAPI) => {
+        const newGroup = await groupService.addGroup(group, isDuplicate)
         return newGroup;
     }
 )

@@ -58,15 +58,19 @@ async function deleteGroup(groupId) {
     }
 }
 
-async function addGroup(groupToAdd) {
+async function addGroup(groupToAdd, isDuplicate = false) {
     try {
-        const newGroup = {
+        const newGroup = isDuplicate ? 
+        structuredClone(groupToAdd) : 
+        {
             title: groupToAdd.title,
             createdAt: Date.now(),
             updatedAt: '',
             products: [],
             order: 0
         }
+
+        isDuplicate && delete newGroup.id
 
         const groupSnapshot = await addDoc(groupCol, newGroup)
         return { ...newGroup, id: groupSnapshot.id }

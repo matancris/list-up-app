@@ -4,13 +4,13 @@ import { Draggable } from 'react-beautiful-dnd';
 
 // Icons import
 import { MdOutlineDelete } from 'react-icons/md';
-import { IoAddOutline } from 'react-icons/io5';
+import { IoAddOutline, IoDuplicateOutline } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { RiCheckboxIndeterminateLine } from 'react-icons/ri';
 
-export function GroupPreview({ group, onUpdateGroup, onDeleteGroup, idx }) {
+export function GroupPreview({ group, onUpdateGroup, onDeleteGroup, onDuplicateGroup, idx }) {
     const [newProd, setNewProd] = useState({ title: '' })
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
     const [isMenuOpen, setIsMenueOpen] = useState(false)
 
     const onUpdateProd = (updatedProduct) => {
@@ -59,8 +59,9 @@ export function GroupPreview({ group, onUpdateGroup, onDeleteGroup, idx }) {
                         <div className="action-btn-container flex">
                             {isMenuOpen &&
                                 <div className="action-btn-menu flex">
-                                    <button onClick={() => onUnmarkAll(group.id)}><RiCheckboxIndeterminateLine /></button>
-                                    <button onClick={() => onDeleteGroup(group.id)}><MdOutlineDelete /></button>
+                                    <button onClick={() => onDuplicateGroup(group, true)} title="Duplicate"><IoDuplicateOutline /></button>
+                                    <button onClick={() => onUnmarkAll(group.id)} title="Unmark all"><RiCheckboxIndeterminateLine /></button>
+                                    <button onClick={() => onDeleteGroup(group.id)} title="Delete"><MdOutlineDelete /></button>
                                 </div>
                             }
                             {!isMenuOpen &&
