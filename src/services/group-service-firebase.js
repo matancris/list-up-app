@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, updateDoc, deleteDoc, orderBy, query } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, updateDoc, deleteDoc, orderBy, query } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { utilService } from './util-service';
 

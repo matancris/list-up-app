@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { FiCheck } from 'react-icons/fi';
 import { MdOutlineDelete } from 'react-icons/md';
 import { RiEditLine } from 'react-icons/ri';
 
 
 export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
 
-    const [updatedProd, setUpdatedProduct] = useState({...product})
+    const [updatedProd, setUpdatedProduct] = useState({ ...product })
     const [isEditMode, setIsEditMode] = useState(false)
 
     const titleRef = useRef()
@@ -34,7 +35,7 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
     }
 
     return (
-        <section className={`product-preview flex space-between align-center ${product.isDone ? 'done' : ''}`}>
+        <section className={`product-preview flex  align-center ${isEditMode ? '' : 'space-between'} ${product.isDone ? 'done' : ''}`}>
             <label className='flex align-center' htmlFor={`check-${product.id}`}>
                 <input type="checkbox" name="isDone" id={`check-${product.id}`} onChange={handleChange} checked={product.isDone} />
                 {!isEditMode &&
@@ -49,10 +50,13 @@ export function ProductPreview({ product, onUpdateProd, onDeleteProd }) {
                         value={updatedProd.title}
                     />}
             </label>
-            <div className="action-btn-container flex">
-                <button onMouseDown={onEdit}><RiEditLine /></button>
-                <button onClick={() => onDeleteProd(product.id)}><MdOutlineDelete /></button>
-            </div>
+            {!isEditMode &&
+                <div className="action-btn-container flex">
+                    <button onMouseDown={onEdit}><RiEditLine /></button>
+                    <button onClick={() => onDeleteProd(product.id)}><MdOutlineDelete /></button>
+                </div>}
+            {isEditMode && <button onMouseDown={onEdit}><FiCheck /></button>}
+
         </section>
     )
 }
