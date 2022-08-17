@@ -46,8 +46,8 @@ export const addGroup = createAsyncThunk(
 
 export const updateGroup = createAsyncThunk(
     'groups/updateGroup',
-    async ({ groupId, updatedProduct, prodToRemoveId }, thunkAPI) => {
-        const updatedGroup = await groupService.updateGroup(groupId, updatedProduct, prodToRemoveId)
+    async ({groupToUpdate, newProd}, thunkAPI) => {
+        const updatedGroup = await groupService.updateGroup(groupToUpdate, newProd)
         return updatedGroup;
     }
 )
@@ -162,6 +162,13 @@ export default groupSlice.reducer
         //     'groups/unMarkAllProd',
         //     async ({ groupId }, thunkAPI) => {
         //         const updatedGroup = await groupService.unMarkAllProd(groupId)
+        //         return updatedGroup;
+        //     }
+        // )
+        // export const updateGroup = createAsyncThunk(
+        //     'groups/updateGroup',
+        //     async ({ groupId, updatedProduct, prodToRemoveId }, thunkAPI) => {
+        //         const updatedGroup = await groupService.updateGroup(groupId, updatedProduct, prodToRemoveId)
         //         return updatedGroup;
         //     }
         // )

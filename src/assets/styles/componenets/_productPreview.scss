@@ -6,7 +6,7 @@
         order: 1;
     }
 
-    &.done h2{
+    &.done h2 {
         text-decoration: line-through;
     }
 
@@ -17,23 +17,24 @@
 
     // @include for-normal-layout {
 
-        .action-btn-container {
-            visibility: hidden;
-            opacity: 0;
-            transition: .3s;
+    .action-btn-container {
+        visibility: hidden;
+        opacity: 0;
+        transition: .3s;
 
-            &>*:not(:last-child) {
-                margin-inline-end: 0.5rem;
-            }
+        &>*:not(:last-child) {
+            margin-inline-end: 0.5rem;
         }
+    }
 
-        &:hover .action-btn-container {
-            visibility: visible;
-            opacity: 1;
-        }
+    &:hover .action-btn-container {
+        visibility: visible;
+        opacity: 1;
+    }
+
     // }
 
-    input[type=checkbox]{
+    input[type=checkbox] {
         margin: 0;
     }
 

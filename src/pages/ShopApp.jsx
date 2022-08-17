@@ -15,9 +15,8 @@ export default function ShopApp() {
     dispatch(getGroups())
   }, [dispatch])
 
-
-  const onUpdateGroup = async (groupId, updatedProduct, prodToRemoveId) => {
-    dispatch(updateGroup({ groupId, updatedProduct, prodToRemoveId }))
+  const onUpdateGroup = async (groupToUpdate, newProd) => {
+    dispatch(updateGroup({groupToUpdate, newProd}))
   }
 
   const onRemoveGroup = async (groupId) => {

@@ -19,30 +19,17 @@ async function getGroups() {
     return groups;
 }
 
-async function updateGroup(groupId, updatedProduct = null, prodToRemoveId = null) {
+async function updateGroup(updatedGroup, newProd = null) {
 
     try {
-        const groupRef = doc(db, 'group', groupId)
-        const groupSnapshot = await getDoc(groupRef)
-        const group = groupSnapshot.data()
-        let { products } = group
+        const groupRef = doc(db, 'group', updatedGroup.id)
 
-        if (prodToRemoveId) {
-            products = products.filter(prod => prod.id !== prodToRemoveId)
-        } else if (updatedProduct && !updatedProduct.id) {
-            products.push(_createProd(updatedProduct.title))
-
-        } else if (!updatedProduct && !prodToRemoveId) { // Unmark all the products
-            products.forEach(prod => prod.isDone = false)
-        } else {
-            const prevProdIdx = products.findIndex(product => product.id === updatedProduct.id)
-            products.splice(prevProdIdx, 1, updatedProduct)
+        if (newProd) {
+            updatedGroup.products = [...updatedGroup.products, _createProd(newProd.title)]
         }
+        await updateDoc(groupRef, updatedGroup)
 
-        group.products = [...products]
-        await updateDoc(groupRef, group)
-
-        return { ...group, id: groupRef.id }
+        return { ...updatedGroup, id: groupRef.id }
     } catch (err) {
         console.error(err)
     }
@@ -60,15 +47,15 @@ async function deleteGroup(groupId) {
 
 async function addGroup(groupToAdd, isDuplicate = false) {
     try {
-        const newGroup = isDuplicate ? 
-        structuredClone(groupToAdd) : 
-        {
-            title: groupToAdd.title,
-            createdAt: Date.now(),
-            updatedAt: '',
-            products: [],
-            order: 0
-        }
+        const newGroup = isDuplicate ?
+            structuredClone(groupToAdd) :
+            {
+                title: groupToAdd.title,
+                createdAt: Date.now(),
+                updatedAt: '',
+                products: [],
+                order: 0
+            }
 
         isDuplicate && delete newGroup.id
 
@@ -168,4 +155,32 @@ function _createProd(title) {
 //         console.error(err)
 //     }
 //     console.log('gGroups', gGroups);
+// }
+// async function updateGroup(groupId, updatedProduct = null, prodToRemoveId = null) {
+
+//     try {
+//         const groupRef = doc(db, 'group', groupId)
+//         const groupSnapshot = await getDoc(groupRef)
+//         const group = groupSnapshot.data()
+//         let { products } = group
+
+//         if (prodToRemoveId) {
+//             products = products.filter(prod => prod.id !== prodToRemoveId)
+//         } else if (updatedProduct && !updatedProduct.id) {
+//             products.push(_createProd(updatedProduct.title))
+
+//         } else if (!updatedProduct && !prodToRemoveId) { // Unmark all the products
+//             products.forEach(prod => prod.isDone = false)
+//         } else {
+//             const prevProdIdx = products.findIndex(product => product.id === updatedProduct.id)
+//             products.splice(prevProdIdx, 1, updatedProduct)
+//         }
+
+//         group.products = [...products]
+//         await updateDoc(groupRef, group)
+
+//         return { ...group, id: groupRef.id }
+//     } catch (err) {
+//         console.error(err)
+//     }
 // }
